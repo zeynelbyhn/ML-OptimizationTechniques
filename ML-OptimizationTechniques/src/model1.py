@@ -1,0 +1,246 @@
+import pandas as pd
+import numpy as np
+import time
+import matplotlib.pyplot as plt
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics import accuracy_score
+
+# ==========================
+# 1. VERİ HAZIRLIĞI
+# ==========================
+print("Veri setleri yükleniyor...")
+df_train = pd.read_csv('training.csv')
+df_test = pd.read_csv('test.csv')
+
+print("Model yükleniyor...")
+model_st = SentenceTransformer('ytu-ce-cosmos/turkish-e5-large')
+
+def get_vectorized_data(df):
+    questions = ["query: " + str(q) for q in df['soru']]
+    answers = ["passage: " + str(a) for a in df['cevap']]
+    
+    q_emb = model_st.encode(questions, show_progress_bar=True)
+    a_emb = model_st.encode(answers, show_progress_bar=True)
+    
+    concat_vec = np.concatenate([q_emb, a_emb], axis=1)
+    bias = np.ones((concat_vec.shape[0], 1))
+    final_vec = np.hstack([concat_vec, bias])
+    
+    return final_vec
+
+print("Veriler vektörleştiriliyor...")
+X_train = get_vectorized_data(df_train)
+X_test = get_vectorized_data(df_test)
+
+# Etiketleri sadece reshape yapıyoruz (-1 ve 1 oldukları için)
+y_train = df_train['etiket'].values.reshape(-1, 1)
+y_test = df_test['etiket'].values.reshape(-1, 1)
+
+print(f"Veri Hazır! X_train: {X_train.shape}")
+
+# ==========================
+# 2. MODEL SINIFI
+# ==========================
+class TwoLayerMLP:
+    def __init__(self, input_dim, hidden_dim=64):
+        self.input_dim = input_dim 
+        self.hidden_dim = hidden_dim   
+        scale_w1 = np.sqrt(1 / input_dim)
+        scale_w2 = np.sqrt(1 / hidden_dim)     
+        self.W1 = np.random.randn(input_dim, hidden_dim) * scale_w1
+        self.W2 = np.random.randn(hidden_dim, 1) * scale_w2
+        
+    def forward(self, X):
+        self.z1 = X @ self.W1            
+        self.a1 = np.tanh(self.z1)
+        self.z2 = self.a1 @ self.W2    
+        self.a2 = np.tanh(self.z2)      
+        return self.a2
+       
+    def backward(self, X, y_true, y_pred):
+        N = X.shape[0]
+        dy_pred = (y_pred - y_true) / N
+        
+        delta2 = dy_pred * (1 - self.a2**2)
+        dW2 = self.a1.T @ delta2
+        
+        delta1 = (delta2 @ self.W2.T) * (1 - self.a1**2)
+        dW1 = X.T @ delta1
+        
+        return dW1, dW2
+
+
+class Optimizer:
+    def __init__(self, method, lr=None):
+        self.method = method
+        self.t = 0 
+        self.cache = {} 
+        
+        if lr is None:
+            if method == 'adam':
+                self.lr = 0.001   
+            elif method == 'gd':
+                self.lr = 0.01     
+            elif method == 'sgd':
+                self.lr = 0.1    
+        else:
+            self.lr = lr  
+                    
+    def step(self, model, dW1, dW2):
+        params = [model.W1, model.W2]
+        grads = [dW1, dW2]
+        names = ['W1', 'W2']
+        
+        if self.method == 'gd' or self.method == 'sgd':
+            for i in range(len(params)):
+                params[i] -= self.lr * grads[i]
+
+        elif self.method == 'adam':
+            self.t += 1
+            beta1, beta2, eps = 0.9, 0.999, 1e-8
+            
+            for i, name in enumerate(names):
+                g = grads[i] 
+                # Hafıza (Cache) yoksa oluştur
+                if name + '_m' not in self.cache:
+                    self.cache[name + '_m'] = np.zeros_like(params[i])
+                    self.cache[name + '_v'] = np.zeros_like(params[i])
+                m = self.cache[name + '_m']
+                v = self.cache[name + '_v']
+                m = beta1 * m + (1 - beta1) * g
+                v = beta2 * v + (1 - beta2) * (g ** 2)
+                self.cache[name + '_m'] = m
+                self.cache[name + '_v'] = v
+                m_hat = m / (1 - beta1 ** self.t)
+                v_hat = v / (1 - beta2 ** self.t)
+                params[i] -= self.lr * m_hat / (np.sqrt(v_hat) + eps)
+
+        model.W1, model.W2 = params[0], params[1] 
+
+
+def run_experiments():
+    optimizers = ['gd', 'sgd', 'adam']
+    seeds = [42, 10, 2024, 7, 99]
+    epochs = 100 
+    batch_size = 32
+    
+    history = {opt: {"loss": [], "acc": [], "time": []} for opt in optimizers}
+    
+    for opt in optimizers:
+        
+        all_losses = []
+        all_accs = []
+        all_times = []
+        
+        for seed in enumerate(seeds):
+            np.random.seed(seed)
+            model = TwoLayerMLP(X_train.shape[1], hidden_dim=64)
+            optimizer = Optimizer(opt)
+            
+            seed_losses = []
+            seed_accs = []
+            seed_times = []
+            
+            start_time = time.time()
+            
+            for epoch in range(epochs):
+                indices = np.arange(X_train.shape[0])
+                np.random.shuffle(indices)
+                X_shuf = X_train[indices]
+                y_shuf = y_train[indices]
+                
+                if opt == 'gd':
+                    y_pred = model.forward(X_train)
+                    dW1, dW2 = model.backward(X_train, y_train, y_pred)
+                    optimizer.step(model, dW1, dW2)
+                else: 
+                    for i in range(0, X_train.shape[0], batch_size):
+                        X_batch = X_shuf[i:i+batch_size]
+                        y_batch = y_shuf[i:i+batch_size]
+                        y_pred_batch = model.forward(X_batch)
+                        dW1, dW2 = model.backward(X_batch, y_batch, y_pred_batch)
+                        optimizer.step(model, dW1, dW2)
+                
+                elapsed = time.time() - start_time
+                y_pred_test = model.forward(X_test)
+                preds_binary = np.where(y_pred_test > 0, 1, -1)
+                acc = accuracy_score(y_test, preds_binary)
+                y_pred_train = model.forward(X_train)
+                loss = np.mean((y_train - y_pred_train) ** 2)
+                
+                seed_losses.append(loss)
+                seed_accs.append(acc)
+                seed_times.append(elapsed)
+            
+            all_losses.append(seed_losses)
+            all_accs.append(seed_accs)
+            all_times.append(seed_times)
+            
+        history[opt]["loss"] = np.mean(all_losses, axis=0)
+        history[opt]["acc"] = np.mean(all_accs, axis=0)
+        history[opt]["time"] = np.mean(all_times, axis=0)
+        
+    return history, epochs
+
+# Deneyi Çalıştır
+print("=" * 50)
+print("MLP OPTIMIZER KARŞILAŞTIRMASI")
+print("=" * 50)
+history, epochs_count = run_experiments()
+
+# ==========================
+# 5. TEMİZ GRAFİKLER (2x2)
+# ==========================
+
+
+fig, axes = plt.subplots(2, 2, figsize=(15, 12))
+colors = {'gd': 'tab:blue', 'sgd': 'tab:orange', 'adam': 'tab:green'}
+labels = {'gd': 'GD', 'sgd': 'SGD', 'adam': 'Adam'}
+
+# 1. EPOCH vs LOSS
+ax = axes[0, 0]
+for opt in history:
+    ax.plot(range(epochs_count), history[opt]['loss'], label=labels[opt], color=colors[opt], linewidth=2)
+ax.set_title("Epoch vs Training Loss (MSE)", fontweight='bold')
+ax.set_xlabel("Epoch")
+ax.set_ylabel("Loss")
+
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# 2. EPOCH vs ACCURACY
+ax = axes[0, 1]
+for opt in history:
+    ax.plot(range(epochs_count), history[opt]['acc'], label=labels[opt], color=colors[opt], linewidth=2)
+ax.set_title("Epoch vs Test Accuracy", fontweight='bold')
+ax.set_xlabel("Epoch")
+ax.set_ylabel("Accuracy")
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# 3. TIME vs LOSS
+ax = axes[1, 0]
+for opt in history:
+    ax.plot(history[opt]['time'], history[opt]['loss'], label=labels[opt], color=colors[opt], linewidth=2)
+ax.set_title("Time (s) vs Training Loss", fontweight='bold')
+ax.set_xlabel("Time (s)")
+ax.set_ylabel("Loss")
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# 4. TIME vs ACCURACY
+ax = axes[1, 1]
+for opt in history:
+    ax.plot(history[opt]['time'], history[opt]['acc'], label=labels[opt], color=colors[opt], linewidth=2)
+ax.set_title("Time (s) vs Test Accuracy", fontweight='bold')
+ax.set_xlabel("Time (s)")
+ax.set_ylabel("Accuracy")
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('optimizer_standard_clean.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+print("\n✓ Standart grafik kaydedildi: optimizer_standard_clean.png")
+
