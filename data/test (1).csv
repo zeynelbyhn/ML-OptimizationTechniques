@@ -1,0 +1,101 @@
+soru,cevap,etiket
+"kuantum dolanıklık nedir?","Kuantum parçacıklarının durumlarının birbirine bağlı olmasıdır.",1
+"kuantum dolanıklık nedir?","Işık hızından hızlı hareket eden parçacıklardır.",-1
+"derin öğrenme nasıl çalışır?","Yapay sinir ağları kullanarak veriden öğrenen bir makine öğrenmesi alt alanıdır.",1
+"derin öğrenme nasıl çalışır?","Bilgisayarların insan gibi düşünmesini sağlayan yazılımlardır.",-1
+"aşırı öğrenme overfitting nedir?","Modelin eğitim verisindeki gürültüye veya ayrıntılara fazla uyum sağlamasıdır.",1
+"aşırı öğrenme overfitting nedir?","Test verisinde kötü performans göstermesidir.",-1
+"bilinç nasıl oluşur?","Beynin karmaşık nöral ağlarının entegrasyonuyla ortaya çıkar.",1
+"bilinç nasıl oluşur?","Sadece beynin fiziksel yapısının bir sonucudur.",-1
+"asimetrik şifreleme ne işe yarar?","Genel ve özel anahtar kullanarak güvenli iletişim sağlar.",1
+"asimetrik şifreleme ne işe yarar?","Verileri tek anahtarla şifrelemeye yarar.",-1
+"boyut laneti nedir?","Yüksek boyutlu verilerde model karmaşıklığının artmasıdır.",1
+"boyut laneti nedir?","Veri setinin büyümesiyle ortaya çıkan bir sorundur.",-1
+"genom dizileme nasıl yapılır?","DNA dizisinin nükleotid bazları okunarak belirlenir.",1
+"genom dizileme nasıl yapılır?","Tüm genlerin haritasını çıkarmak için kullanılır.",-1
+"solid prensipleri nelerdir?","Tek sorumluluk, açık-kapalı, yer çekimi açıklığı, arayüz ayrımı ve bağımlılıkların ters çevrilmesidir.",1
+"solid prensipleri nelerdir?","Yazılım tasarımındaki 5 temel kuraldır.",-1
+"dna replikasyonu nasıl gerçekleşir?","DNA polimeraz enzimi tarafından çift sarmalın açılmasıyla olur.",1
+"dna replikasyonu nasıl gerçekleşir?","Hücre bölünmesi sırasında genetik bilginin kopyalanmasıdır.",-1
+"kuantum hesaplama avantajı nedir?","Kuantum bitlerinin süperpozisyon özelliğinden faydalanarak karmaşık problemleri hızla çözmeyi sağlar.",1
+"kuantum hesaplama avantajı nedir?","Süper bilgisayarlardan daha güçlüdür.",-1
+"kuantum tünelleme nasıl çalışır?","Parçacıkların klasik olarak aşılamaz enerji bariyerlerinden geçebilmesidir.",1
+"kuantum tünelleme nasıl çalışır?","Parçacıkların hızlarının artmasıyla gerçekleşir.",-1
+"kuantum belirsizlik ilkesi neyi söyler?","Bir parçacığın konum ve momentumunun aynı anda kesin olarak bilinemeyeceğini ifade eder.",1
+"kuantum belirsizlik ilkesi neyi söyler?","Kuantum fiziğinin en temel yasasıdır.",-1
+"kriptografik hash fonksiyonu nedir?","Girdi verisini sabit uzunlukta özet (hash) değerine dönüştüren fonksiyondur.",1
+"kriptografik hash fonksiyonu nedir?","Şifreleme için kullanılan matematiksel bir fonksiyondur.",-1
+"evrişimsel sinir ağları ne için kullanılır?","Görüntü ve video verilerinde uzamsal hiyerarşiyi öğrenmek için kullanılır.",1
+"evrişimsel sinir ağları ne için kullanılır?","Doğal dil işlemede yaygın olarak kullanılır.",-1
+"derin öğrenmede kayıp fonksiyonu nedir?","Model tahminleri ile gerçek değerler arasındaki farkı ölçen fonksiyondur.",1
+"derin öğrenmede kayıp fonksiyonu nedir?","Optimizasyon sırasında kullanılmayan bir kavramdır.",-1
+"özyinelemeli sinir ağları ne yapar?","Zaman serisi veya doğal dil gibi ardışık verileri işler.",1
+"özyinelemeli sinir ağları ne yapar?","Sadece görüntü tanıma için kullanılır.",-1
+"transformers mimarisi hangi problemi çözer?","Uzun metinlerdeki bağlamı anlama ve işleme problemini çözer.",1
+"transformers mimarisi hangi problemi çözer?","Sinir ağlarının hesaplama maliyetini azaltır.",-1
+"doğal dil işlemede kelime gömme nedir?","Kelimeleri yoğun vektör uzayında temsil eden matematiksel fonksiyondur.",1
+"doğal dil işlemede kelime gömme nedir?","Yapay zekanın insan dilini anlamasını sağlar.",-1
+"destek vektör makineleri ne için kullanılır?","Verileri hiper düzlemle ayıran sınıflandırma algoritmasıdır.",1
+"destek vektör makineleri ne için kullanılır?","Regresyon problemlerinde kullanılmaz.",-1
+"gradyan inişi nedir?","Model parametrelerini kayıp fonksiyonunun gradyanına göre güncelleyen optimizasyon yöntemidir.",1
+"gradyan inişi nedir?","Sinir ağlarının eğitimi sırasında kullanılan bir tekniktir.",-1
+"nöral makine ne yapar?","İç içe geçmiş katmanlarla karmaşık desenleri öğrenir.",1
+"nöral makine ne yapar?","Sadece regresyon problemleri için kullanılır.",-1
+"aktivasyon fonksiyonu ne işe yarar?","Sinir ağlarının doğrusal olmayan ilişkileri öğrenmesini sağlar.",1
+"aktivasyon fonksiyonu ne işe yarar?","Geri yayılım algoritmasıyla birlikte çalışır.",-1
+"dropout regülasyonu nedir?","Eğitim sırasında rastgele nöronları devre dışı bırakarak aşırı öğrenmeyi önleme yöntemidir.",1
+"dropout regülasyonu nedir?","Model karmaşıklığını artıran bir tekniktir.",-1
+"bir önyargı ne anlama gelir?","Tahminlerde sistematik hata veya yanlılık oluşmasıdır.",1
+"bir önyargı ne anlama gelir?","Makine öğrenmesinde istenmeyen bir durumdur.",-1
+"kümeleme algoritmaları ne için kullanılır?","Benzer veri noktalarını gruplamak için kullanılır.",1
+"kümeleme algoritmaları ne için kullanılır?","Denetimli öğrenme problemlerinde kullanılır.",-1
+"anomali tespiti nasıl yapılır?","Normal davranıştan sapmaları tespit etmek için istatistiksel yöntemler kullanılır.",1
+"anomali tespiti nasıl yapılır?","Makine öğrenmesinde sık kullanılan bir tekniktir.",-1
+"veri öznitelik seçimi nedir?","Model performansını artırmak için en önemli değişkenleri seçme sürecidir.",1
+"veri öznitelik seçimi nedir?","Veri setindeki tüm özelliklerin kullanılması gerekir.",-1
+"çapraz doğrulama nedir?","Modelin farklı veri alt kümeleri üzerinde tutarlılığını test etme yöntemidir.",1
+"çapraz doğrulama nedir?","Eğitim ve test verisinin karıştırılmasıdır.",-1
+"random orman algoritması ne yapar?","Birden fazla karar ağacının kolektif gücünü birleştirir.",1
+"random orman algoritması ne yapar?","Tek bir karar ağacı kullanır.",-1
+"gradient boosting nedir?","Zayıf öğrenicileri art arda eğiterek güçlü bir model oluşturma yöntemidir.",1
+"gradient boosting nedir?","Sadece sınıflandırma problemlerinde kullanılır.",-1
+"l1 ve l2 regülasyonu ne işe yarar?","Model parametrelerinin büyümesini sınırlayarak aşırı öğrenmeyi önler.",1
+"l1 ve l2 regülasyonu ne işe yarar?","Kayıp fonksiyonuna eklenen terimlerdir.",-1
+"ensembe öğrenme nedir?","Birden fazla modelin çıktılarını birleştirerek daha iyi tahmin elde etme yöntemidir.",1
+"ensembe öğrenme nedir?","Tek bir model kullanmaktan daha kötü sonuçlar verir.",-1
+"veri ön işleme adımları nelerdir?","Eksik veri doldurma, ölçeklendirme ve kategorik veri dönüşümü gibi işlemleri içerir.",1
+"veri ön işleme adımları nelerdir?","Model eğitimi için gerekli değildir.",-1
+"öznitelik mühendisliği nedir?","Mevcut verilerden yeni anlamlı öznitelikler türetme sürecidir.",1
+"öznitelik mühendisliği nedir?","Veri biliminde temel bir kavramdır.",-1
+"veri dengesizliği problemi nasıl çözülür?","Aşırı örneklem veya az örneklem gibi tekniklerle giderilebilir.",1
+"veri dengesizliği problemi nasıl çözülür?","Sınıf ağırlıkları kullanmak yeterlidir.",-1
+"zaman serisi tahmini nedir?","Geçmiş verilere dayanarak gelecek değerleri öngörme işlemidir.",1
+"zaman serisi tahmini nedir?","Makine öğrenmesinin bir alt alanıdır.",-1
+"veri kalitesi neden önemlidir?","Kötü veri, model performansını ve güvenilirliğini doğrudan etkiler.",1
+"veri kalitesi neden önemlidir?","Temiz veriyle çalışmak her zaman mümkündür.",-1
+"veri keşfi nedir?","Veriyi anlamak için betimleyici istatistikler ve görselleştirmeler kullanma sürecidir.",1
+"veri keşfi nedir?","Model eğitimi sonrasında yapılır.",-1
+"etiketleme stratejileri nelerdir?","Sınıflandırma problemlerinde etiket oluşturma yaklaşımlarıdır.",1
+"etiketleme stratejileri nelerdir?","Deneysel tasarımda kullanılan yöntemlerdir.",-1
+"veri artırma nedir?","Mevcut veri setini çeşitli dönüşümlerle genişletme tekniğidir.",1
+"veri artırma nedir?","Derin öğrenmede yaygın olarak kullanılır.",-1
+"hiperparametre ayarı nedir?","Model performansını etkileyen yapısal ayarların optimize edilmesidir.",1
+"hiperparametre ayarı nedir?","Sinir ağı eğitiminin bir parçası değildir.",-1
+"çapraz doğrulama türleri nelerdir?","K-katlı çapraz doğrulama, zaman serisi çapraz doğrulama gibi yöntemler vardır.",1
+"çapraz doğrulama türleri nelerdir?","Sadece k-katlı çapraz doğrulama kullanılır.",-1
+"optimizasyon algoritmaları nelerdir?","Gradyan iniş, Adam, RMSprop gibi algoritmalar vardır.",1
+"optimizasyon algoritmaları nelerdir?","Model parametrelerini güncellemek için kullanılır.",-1
+"nöral ağ mimarisi nedir?","Girdi, gizli ve çıktı katmanlarından oluşan yapısal çerçevedir.",1
+"nöral ağ mimarisi nedir?","Tüm derin öğrenme modelleri aynı mimariye sahiptir.",-1
+"evrişimsel katman ne yapar?","Görüntü verisindeki uzamsal örüntüleri çıkarır.",1
+"evrişimsel katman ne yapar?","Dizi verileri için kullanılır.",-1
+"tam bağlı katman ne işe yarar?","Önceki katmandaki tüm özelliklerle bağlantı kurar.",1
+"tam bağlı katman ne işe yarar?","Sadece giriş katmanında bulunur.",-1
+"çıkış katmanı aktivasyonu nasıl seçilir?","Problemin türüne göre (sınıflandırma/regresyon) belirlenir.",1
+"çıkış katmanı aktivasyonu nasıl seçilir?","Tüm problemlerde softmax kullanılır.",-1
+"kayıp fonksiyonu seçimi neden önemlidir?","Modelin hatasını doğru ölçmek için kritiktir.",1
+"kayıp fonksiyonu seçimi neden önemlidir?","Sadece sınıflandırma problemlerinde gereklidir.",-1
+"öğrenme oranı nedir?","Gradyan iniş sırasında parametre güncelleme büyüklüğünü kontrol eder.",1
+"öğrenme oranı nedir?","Sabit bir değer olarak ayarlanır.",-1
+"erken durdurma nedir?","Eğitim sırasında doğrulama hatası artmaya başladığında eğitimi durdurma tekniğidir.",1
+"erken durdurma nedir?","Model aşırı öğrenmesini önlemek için kullanılır.",-1
