@@ -59,12 +59,12 @@ The visualization below shows how different algorithms navigate the high-dimensi
 * **SGD:** Oscillates around the target due to noise.
 * **GD:** Moves slowly and linearly.
 
-*(Add your `tsne_trajectory.png` here from the report)*
+![t-SNE Trajectories](tsne_trajectory.png)
 
 ### 2. Loss & Accuracy Curves
 Training loss decay and test accuracy improvements over epochs:
 
-*(Add your `loss_graph.png` here from the report)*
+![t-SNE Trajectories](loss_graph.png)
 
 ---
 
