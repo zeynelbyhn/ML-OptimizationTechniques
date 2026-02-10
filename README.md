@@ -103,6 +103,10 @@ Adam combines the benefits of Momentum (moving average of gradients) and RMSProp
 
 ---
 
+## 📜 License
 
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-*This project was developed for the AI Optimization Techniques course at YTU CE (Computer Engineering).*
+---
+
+*Developed at YTU CE (Computer Engineering).*
